@@ -19,7 +19,7 @@ root.render(
       domain={process.env.REACT_APP_AUTH_DOMAIN}
       clientId={process.env.REACT_APP_AUTH_CLIENT_ID}
       authorizationParams={{
-        redirect_uri: `${window.location.origin}/cart`,
+        redirect_uri: window.location.origin,
       }}
       cacheLocation="localstorage"
     >
