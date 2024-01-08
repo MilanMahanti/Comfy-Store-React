@@ -26,15 +26,21 @@ const CheckoutForm = () => {
   const [clientSecret, setClientSecret] = useState("");
   const stripe = useStripe();
   const elements = useElements();
-
   const createPaymentIntent = async () => {
     try {
       const { data } = await axios.post(
         "/.netlify/functions/create-payment-intent",
-
-        JSON.stringify({ shippingFee, totalPrice })
+        JSON.stringify(
+          { shippingFee, totalPrice, myUser },
+          {
+            headers: {
+              "script-src": "self",
+            },
+          }
+        )
       );
-      setClientSecret(data.clientSecret);
+
+      setClientSecret(data.client_secret);
     } catch (error) {
       console.log(error.response);
     }
